@@ -187,6 +187,9 @@ module ActivePdftk
         cmd.insert(0, "cd #{Dir.tmpdir} && ")
       end
       Open3.popen3(cmd) do |stdin, stdout, stderr|
+        stdin.set_encoding("ASCII-8BIT")
+        stdout.set_encoding("ASCII-8BIT")
+        stderr.set_encoding("ASCII-8BIT")
         if @input
           @input.rewind
           stdin.puts @input.read
